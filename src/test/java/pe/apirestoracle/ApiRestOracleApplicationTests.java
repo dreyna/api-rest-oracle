@@ -14,8 +14,8 @@ private RolDao rolDao;
 	@Test
 	void contextLoads() {
 		Rol r = new Rol();
-		r.setId_rol(26);
-		r.setNomrol("Hola 2");
-		System.out.println(rolDao.delete(26));
+		r.setId_rol(3);
+		r.setNomrol("Administrador1");
+		rolDao.convertitMap(rolDao.read(3));
 	}
 }
