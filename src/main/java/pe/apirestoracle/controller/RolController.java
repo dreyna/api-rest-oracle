@@ -36,7 +36,6 @@ public Map<String, Object> read(@PathVariable int id ) {
 		System.out.println("error");
 		return null;
 	}
-
 }
 @DeleteMapping("/delete/{id}")
 public int delete(@PathVariable int id ) {
@@ -45,17 +44,22 @@ public int delete(@PathVariable int id ) {
 //PostMapping permite registrar un nuevo rol
 @PostMapping("/add")
 public int create(@RequestBody Rol r) {
+	System.out.println("Crear: "+r.getNomrol());
 	return rolService.create(r);
 }
 //PutMappin permite modificar rol
 @PutMapping("/update/{id}")
-public String edit(@RequestBody Rol r, @PathVariable int id) {
+public int edit(@RequestBody Rol r, @PathVariable int id) {
 	//Map<String, Object> map = rolService.read(id);
-	//System.out.println(map);
+	System.out.println(r.getNomrol());
 	Rol rol = new Rol();
 	rol.setId_rol(id);
-	rol.setNomrol(r.getNomrol());	 
-	rolService.update(r);
-	return "hola";
+	rol.setNomrol(r.getNomrol());	 	
+	return rolService.update(r);
+}
+@PutMapping("/update/logica/{id}")
+public int edit(@PathVariable int id) {
+	System.out.println(id);
+	return rolService.update(id);
 }
 }

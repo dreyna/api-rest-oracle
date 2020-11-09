@@ -27,7 +27,7 @@ private SimpleJdbcCall simpleJdbcCall;
 		simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)			
 		.withCatalogName("pk_roles") //nombre del paquete
 		.withProcedureName("sp_read_rol") //nombre del procedimiento
-		.declareParameters(new SqlOutParameter("t_rol", OracleTypes.REF_CURSOR, new ColumnMapRowMapper()), new SqlParameter("idrol", OracleTypes.NUMBER));
+		.declareParameters(new SqlOutParameter("cursor_roles", OracleTypes.REF_CURSOR, new ColumnMapRowMapper()), new SqlParameter("idrol", OracleTypes.NUMBER));
 		SqlParameterSource in = new MapSqlParameterSource().addValue("idrol", id);
 /*		Map<String, Object> out= simpleJdbcCall.execute(in);	
 		out.forEach((rol, nomrol)->{
@@ -70,6 +70,13 @@ public void convertitMap(Map<String, Object> map) {
 	for (Entry<String, Object> entry : map.entrySet()) {
         System.out.println("entry key : "+entry.getKey());
         System.out.println("Object value :"+entry.getValue());     
+        System.out.println("Object value :"+entry.getClass().toString());     
 	}
+}
+
+@Override
+public int update(int id) {
+	// TODO Auto-generated method stub
+	return  jdbcTemplate.update("call pk_roles.sp_delete_logica_rol(?)", id);
 }
 }

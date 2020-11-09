@@ -16,6 +16,6 @@ private RolDao rolDao;
 		Rol r = new Rol();
 		r.setId_rol(3);
 		r.setNomrol("Administrador1");
-		rolDao.convertitMap(rolDao.read(3));
+		System.out.println(rolDao.update(163));
 	}
 }

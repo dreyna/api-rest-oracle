@@ -43,4 +43,10 @@ private RolDao rolDao;
 		return rolDao.delete(id);
 	}
 
+	@Override
+	public int update(int id) {
+		// TODO Auto-generated method stub
+		return rolDao.update(id);
+	}
+
 }
