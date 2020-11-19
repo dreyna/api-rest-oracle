@@ -95,16 +95,13 @@ public int update(int id) {
 @Override
 public List<GrantedAuthority> buscarRolUser(int iduser) {
 
-	List<GrantedAuthority> autores = new ArrayList<>();
+	List<GrantedAuthority> autores = new ArrayList<GrantedAuthority>();
 	String SQL = "SELECT r.idrol, r.nombre FROM usuarios u " + 
 			"INNER JOIN usuarios_roles ur ON u.idusuario=ur.idusuario " + 
 			"INNER JOIN roles r ON r.idrol=ur.idrol " + 
 			"WHERE u.idusuario = ?";
-
 	List<Rol> roles = jdbcTemplate.query(SQL, new Object[]{iduser}, new BeanPropertyRowMapper<Rol>(Rol.class));		
-	System.out.println(gson.toJson(roles));
-	for(int i=0;i<roles.size();i++) {
-		
+	for(int i=0;i<roles.size();i++) {		
 		autores.add(new SimpleGrantedAuthority(roles.get(i).getNombre()));
 	}
 	return autores;

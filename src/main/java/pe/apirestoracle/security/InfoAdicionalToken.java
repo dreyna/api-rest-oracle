@@ -11,16 +11,17 @@ import org.springframework.stereotype.Component;
 
 import pe.apirestoracle.dao.UsuarioDao;
 
+
 @Component
 public class InfoAdicionalToken implements TokenEnhancer{
 	@Autowired
 	private UsuarioDao usuarioDao;
-	//@Autowired
-	//private OpcionesDao opcionesDao;
+
 	@Override
 	public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
 		Map<String, Object> info1 = new HashMap<>();
-		System.out.println(authentication.getName());
+		Map<String, Object> info2 = new HashMap<>();
+		//info2=opcionesDao.listarOpciones(idr);
 		info1 = usuarioDao.datosUsuario(authentication.getName());		
 		((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(info1);
 		
