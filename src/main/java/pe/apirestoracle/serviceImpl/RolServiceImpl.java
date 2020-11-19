@@ -1,5 +1,6 @@
 package pe.apirestoracle.serviceImpl;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,13 +14,13 @@ public class RolServiceImpl implements RolService{
 @Autowired
 private RolDao rolDao;
 	@Override
-	public Map<String, Object> read(int id) {
+	public List<Map<String, Object>> read(int id) {
 		// TODO Auto-generated method stub
 		return rolDao.read(id);
 	}
 
 	@Override
-	public Map<String, Object> readAll() {
+	public List<Map<String, Object>> readAll() {
 		// TODO Auto-generated method stub
 		return rolDao.readAll();
 	}
@@ -33,7 +34,7 @@ private RolDao rolDao;
 	@Override
 	public int update(Rol r) {
 		// TODO Auto-generated method stub
-		System.out.println("service: "+r.getNomrol());
+		System.out.println("service: "+r.getNombre());
 		return rolDao.update(r);
 	}
 

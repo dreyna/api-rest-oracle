@@ -1,13 +1,13 @@
-package pe.apirestoracle.service;
+package pe.apirestoracle.dao;
 
 import java.util.List;
 import java.util.Map;
 
-import pe.apirestoracle.entity.Rol;
+import pe.apirestoracle.entity.Acceso;
 
-public interface RolService {
-	int create(Rol r);
-	int update(Rol r);
+public interface AccesosDao {
+	int create(Acceso a);
+	int update(Acceso a);
 	int update(int id);
 	int delete(int id);
 	List<Map<String, Object>> read(int id);
