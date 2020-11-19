@@ -3,6 +3,7 @@ package pe.apirestoracle;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.google.gson.Gson;
 
@@ -12,15 +13,12 @@ import pe.apirestoracle.entity.Rol;
 
 @SpringBootTest
 class ApiRestOracleApplicationTests {
+
 @Autowired
-private UsuarioDao uDao;
-@Autowired
-private RolDao rolDao;
-Gson gson = new Gson();
-	@Test
-	void contextLoads() {
-		Rol r = new Rol();
-		//System.out.println(uDao.validarUsuario("dreyna"));
-		System.out.println(gson.toJson(rolDao.readHola(1)));
-	}
+PasswordEncoder passwordEncoder;
+@Test
+void contextLoads() {
+	System.out.println(passwordEncoder.encode("123"));
+}
+		
 }
