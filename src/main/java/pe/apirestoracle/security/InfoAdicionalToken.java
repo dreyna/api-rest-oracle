@@ -35,7 +35,8 @@ Gson g = new Gson();
 		datos.put("iduser", user.getIdusuario());
 		datos.put("nombre", per.getNombres());
 		datos.put("user", user.getUsername());
-		datos.put("acceso", accesoDao.readAll(authentication.getName()));
+		//datos.put("acceso", g.toJson(accesoDao.readAll(authentication.getName())));
+		//datos = accesoDao.readAll(authentication.getName())
 		((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(datos);
 
 		return accessToken;

@@ -27,6 +27,7 @@ public class UsuarioService implements UserDetailsService{
 	@Transactional(readOnly = true)
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {		
 		Usuario usuario = usuarioDao.validarUsuario(username);
+		System.out.println(g.toJson(rolDao.buscarRolUser(usuario.getIdusuario())));
 		UserDetails details = new User(usuario.getUsername(),usuario.getPassword(),rolDao.buscarRolUser(usuario.getIdusuario()));
 		return details;
 	}

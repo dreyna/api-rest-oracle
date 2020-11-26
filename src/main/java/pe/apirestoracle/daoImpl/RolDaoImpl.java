@@ -34,7 +34,6 @@ Gson gson =new Gson();
 		.declareParameters(new SqlOutParameter("cursor_roles", OracleTypes.REF_CURSOR, new ColumnMapRowMapper()), new SqlParameter("idrol", OracleTypes.NUMBER));
 		SqlParameterSource in = new MapSqlParameterSource().addValue("idrol", id);
         Map<String, Object> map= simpleJdbcCall.execute(in);	
-
 		return map;	
 	}
 
