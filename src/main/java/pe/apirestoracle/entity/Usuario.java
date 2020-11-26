@@ -4,16 +4,16 @@ public class Usuario {
 private int idusuario;
 private String username;
 private String password;
-private String estado;
+private int estado;
+private int idpersona;
 public Usuario() {
-	super();
 }
-public Usuario(int idusuario, String username, String password, String estado) {
-	super();
+public Usuario(int idusuario, String username, String password, int estado, int idpersona) {
 	this.idusuario = idusuario;
 	this.username = username;
 	this.password = password;
 	this.estado = estado;
+	this.idpersona = idpersona;
 }
 public int getIdusuario() {
 	return idusuario;
@@ -21,7 +21,6 @@ public int getIdusuario() {
 public void setIdusuario(int idusuario) {
 	this.idusuario = idusuario;
 }
-
 public String getUsername() {
 	return username;
 }
@@ -34,11 +33,17 @@ public String getPassword() {
 public void setPassword(String password) {
 	this.password = password;
 }
-public String getEstado() {
+public int getEstado() {
 	return estado;
 }
-public void setEstado(String estado) {
+public void setEstado(int estado) {
 	this.estado = estado;
+}
+public int getIdpersona() {
+	return idpersona;
+}
+public void setIdpersona(int idpersona) {
+	this.idpersona = idpersona;
 }
 
 }

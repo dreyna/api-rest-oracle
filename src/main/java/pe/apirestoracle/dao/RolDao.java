@@ -13,8 +13,8 @@ int update(Rol r);
 int update(int id);
 int delete(int id);
 List<Rol> readHola(int id);
-List<Map<String, Object>> read(int id);
-List<Map<String, Object>> readAll();
+Map<String, Object> read(int id);
+Map<String, Object> readAll();
 List<GrantedAuthority> buscarRolUser(int iduser);
 void convertitMap(Map<String, Object> map);
 }

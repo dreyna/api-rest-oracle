@@ -2,10 +2,6 @@ package pe.apirestoracle.daoImpl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-
-import javax.sql.DataSource;
-
 import oracle.jdbc.internal.OracleTypes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -24,7 +20,6 @@ import com.google.gson.Gson;
 
 import pe.apirestoracle.dao.RolDao;
 import pe.apirestoracle.entity.Rol;
-import pe.apirestoracle.entity.Usuario;
 @Component
 public class RolDaoImpl implements RolDao {
 @Autowired
@@ -32,28 +27,25 @@ private JdbcTemplate jdbcTemplate;
 private SimpleJdbcCall simpleJdbcCall;
 Gson gson =new Gson();
 @Override
-	public List<Map<String, Object>> read(int id) {/*
-	List<Map<String,Object>> lista = new ArrayList<>();
+	public Map<String, Object> read(int id) {
 		simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)			
 		.withCatalogName("pk_roles") //nombre del paquete
 		.withProcedureName("sp_read_rol") //nombre del procedimiento
 		.declareParameters(new SqlOutParameter("cursor_roles", OracleTypes.REF_CURSOR, new ColumnMapRowMapper()), new SqlParameter("idrol", OracleTypes.NUMBER));
 		SqlParameterSource in = new MapSqlParameterSource().addValue("idrol", id);
         Map<String, Object> map= simpleJdbcCall.execute(in);	
-         lista.add(map);*/
-		return jdbcTemplate.queryForList("SELECT *FROM roles");	
+
+		return map;	
 	}
 
 @Override
-public List<Map<String, Object>> readAll() {
-	List<Map<String,Object>> lista = new ArrayList<>();
+public Map<String, Object> readAll() {
 	simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
 			.withCatalogName("pk_roles") //nombre del paquete
 			.withProcedureName("sp_listar_roles") //nombre del procedimiento
 			.declareParameters(new SqlOutParameter("cursor_roles", OracleTypes.REF_CURSOR, new ColumnMapRowMapper()));	
 			Map<String, Object> map = simpleJdbcCall.execute();
-			lista.add(map);
-	return lista;
+	return map;
 }
 
 @Override
@@ -94,7 +86,6 @@ public int update(int id) {
 
 @Override
 public List<GrantedAuthority> buscarRolUser(int iduser) {
-
 	List<GrantedAuthority> autores = new ArrayList<GrantedAuthority>();
 	String SQL = "SELECT r.idrol, r.nombre FROM usuarios u " + 
 			"INNER JOIN usuarios_roles ur ON u.idusuario=ur.idusuario " + 
@@ -113,7 +104,6 @@ public List<Rol> readHola(int id) {
 			"INNER JOIN usuarios_roles ur ON u.idusuario=ur.idusuario " + 
 			"INNER JOIN roles r ON r.idrol=ur.idrol " + 
 			"WHERE u.idusuario = ?";
-String a= "select *from roles where idrol=? ";
-	return  jdbcTemplate.query(a, new Object[]{id}, new BeanPropertyRowMapper<Rol>(Rol.class));		
+	return  jdbcTemplate.query(SQL, new Object[]{id}, new BeanPropertyRowMapper<Rol>(Rol.class));		
 }
 }

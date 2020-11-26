@@ -19,6 +19,5 @@ PasswordEncoder passwordEncoder;
 @Test
 void contextLoads() {
 	System.out.println(passwordEncoder.encode("123"));
-}
-		
+}		
 }

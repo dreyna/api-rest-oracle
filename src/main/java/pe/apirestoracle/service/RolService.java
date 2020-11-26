@@ -10,6 +10,6 @@ public interface RolService {
 	int update(Rol r);
 	int update(int id);
 	int delete(int id);
-	List<Map<String, Object>> read(int id);
-	List<Map<String, Object>> readAll();
+    Map<String, Object> read(int id);
+	Map<String, Object> readAll();
 }

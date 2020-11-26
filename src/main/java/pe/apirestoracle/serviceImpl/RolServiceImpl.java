@@ -14,13 +14,13 @@ public class RolServiceImpl implements RolService{
 @Autowired
 private RolDao rolDao;
 	@Override
-	public List<Map<String, Object>> read(int id) {
+	public Map<String, Object> read(int id) {
 		// TODO Auto-generated method stub
 		return rolDao.read(id);
 	}
 
 	@Override
-	public List<Map<String, Object>> readAll() {
+	public Map<String, Object> readAll() {
 		// TODO Auto-generated method stub
 		return rolDao.readAll();
 	}

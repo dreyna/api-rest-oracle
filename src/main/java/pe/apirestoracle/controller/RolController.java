@@ -1,8 +1,7 @@
 package pe.apirestoracle.controller;
 
-import java.util.List;
-import java.util.Map;
 
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,18 +17,18 @@ import pe.apirestoracle.entity.Rol;
 import pe.apirestoracle.service.RolService;
 
 @RestController
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin(origins = "http://localhost:4200/", maxAge = 3600)
 @RequestMapping("/roles")
 public class RolController {
 @Autowired
 private RolService rolService;
 
 @GetMapping("/all")
-public List<Map<String, Object>> readAll(){
+public Map<String, Object> readAll(){
 	return rolService.readAll();
 }
 @GetMapping("/{id}")
-public List<Map<String, Object>> read(@PathVariable int id ) {
+public Map<String, Object> read(@PathVariable int id ) {
 	try {
 		 return rolService.read(id);
 	} catch (Exception e) {

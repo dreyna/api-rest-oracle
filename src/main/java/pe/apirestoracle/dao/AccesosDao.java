@@ -12,4 +12,5 @@ public interface AccesosDao {
 	int delete(int id);
 	List<Map<String, Object>> read(int id);
 	List<Map<String, Object>> readAll();
+	Map<String, Object> readAll(String username);
 }

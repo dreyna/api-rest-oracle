@@ -33,9 +33,9 @@ public class AthorizationServiceConfig extends AuthorizationServerConfigurerAdap
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 		// TODO Auto-generated method stub
-		clients.inMemory().withClient("musa")
+		clients.inMemory().withClient("angularapp")
 		.secret(passwordEncoder.encode("1234567"))
-		.scopes("red", "write")
+		.scopes("read", "write")
 		.authorizedGrantTypes("password","refresh_token")
 		.accessTokenValiditySeconds(300)
 		.refreshTokenValiditySeconds(300);

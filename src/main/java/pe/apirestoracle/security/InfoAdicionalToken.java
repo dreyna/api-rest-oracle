@@ -9,22 +9,35 @@ import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.stereotype.Component;
 
+import com.google.gson.Gson;
+
+import pe.apirestoracle.dao.AccesosDao;
+import pe.apirestoracle.dao.PersonaDao;
 import pe.apirestoracle.dao.UsuarioDao;
+import pe.apirestoracle.entity.Persona;
+import pe.apirestoracle.entity.Usuario;
 
 
 @Component
 public class InfoAdicionalToken implements TokenEnhancer{
 	@Autowired
 	private UsuarioDao usuarioDao;
-
+	@Autowired
+	private AccesosDao accesoDao;
+	@Autowired
+	private PersonaDao personaDao;
+Gson g = new Gson();
 	@Override
 	public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
-		Map<String, Object> info1 = new HashMap<>();
-		Map<String, Object> info2 = new HashMap<>();
-		//info2=opcionesDao.listarOpciones(idr);
-		info1 = usuarioDao.datosUsuario(authentication.getName());		
-		((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(info1);
-		
+		Usuario user = usuarioDao.read(authentication.getName());
+		Persona per = personaDao.read(user.getIdpersona());
+		Map<String, Object> datos= new HashMap<>();
+		datos.put("iduser", user.getIdusuario());
+		datos.put("nombre", per.getNombres());
+		datos.put("user", user.getUsername());
+		datos.put("acceso", accesoDao.readAll(authentication.getName()));
+		((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(datos);
+
 		return accessToken;
 	}
 
