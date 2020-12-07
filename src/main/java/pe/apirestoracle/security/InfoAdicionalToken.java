@@ -1,6 +1,8 @@
 package pe.apirestoracle.security;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
@@ -31,12 +33,13 @@ Gson g = new Gson();
 	public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
 		Usuario user = usuarioDao.read(authentication.getName());
 		Persona per = personaDao.read(user.getIdpersona());
+		List<Map<String,Object>> accesos = new ArrayList<>();
+		accesos = accesoDao.read(user.getIdusuario());
 		Map<String, Object> datos= new HashMap<>();
 		datos.put("iduser", user.getIdusuario());
 		datos.put("nombre", per.getNombres());
 		datos.put("user", user.getUsername());
-		//datos.put("acceso", g.toJson(accesoDao.readAll(authentication.getName())));
-		//datos = accesoDao.readAll(authentication.getName())
+		datos.put("accesos", accesos);
 		((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(datos);
 
 		return accessToken;
