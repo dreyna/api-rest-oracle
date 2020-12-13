@@ -19,6 +19,6 @@ PasswordEncoder passwordEncoder;
 @Test
 void contextLoads() {
 	//System.out.println(passwordEncoder.encode("1234"));
-	System.out.println(pdao2.validarUsuario("jonas"));
+	System.out.println(pdao2.validarUsuario("dreyna"));
 }		
 }
